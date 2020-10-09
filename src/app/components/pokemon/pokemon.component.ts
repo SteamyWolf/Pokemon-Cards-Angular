@@ -21,7 +21,6 @@ export class Pokemon implements OnInit, OnDestroy {
       if (this.pokemonService.usedPokemon.length > 0) {
         this.pokemonService.usedPokemon.forEach((observs: Observable<PokemonType>) => {
           return this.pokemonSub = observs.subscribe(data => {
-            console.log(this.pageSlice)
             this.pageSlice = this.completePokemon.slice(0, 25)
             let pokeObj = {
               name: data.name,
@@ -47,8 +46,6 @@ export class Pokemon implements OnInit, OnDestroy {
         let pokemon = this.pokemonService.grabPokemon()
         pokemon.forEach((observs: Observable<PokemonType>) => {
           return this.pokemonSub = observs.subscribe(data => {
-            console.log(data)
-            console.log(this.pageSlice)
             this.pageSlice = this.completePokemon.slice(0, 25)
             let pokeObj = {
               name: data.name,
