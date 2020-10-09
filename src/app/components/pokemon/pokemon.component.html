@@ -1,0 +1,23 @@
+<section class="pokemon-cards">
+    <mat-card *ngFor="let pokemon of pageSlice" class="pokemon-card">
+        <mat-card-header>
+            <div mat-card-avatar class="pokemon-avatar" [style.backgroundImage]="'url('+ pokemon.image + ')'"></div>
+            <mat-card-title>{{ pokemon.name|titlecase }}</mat-card-title>
+            <mat-card-subtitle>{{ pokemon.id }}</mat-card-subtitle>
+        </mat-card-header>
+        <img [src]="pokemon.bigImage" style="width: 100%">
+        <mat-card-content>
+            <h3><b>Abilities:</b></h3>
+            <ul *ngFor="let ability of pokemon.abilities">
+                <li>
+                    <app-ability [url]="ability.ability.url" [name]="ability.ability.name"></app-ability>
+                </li>
+            </ul>
+        </mat-card-content>
+    </mat-card>
+</section>
+<mat-paginator [length]="completePokemon.length"
+               [pageSize]="25"
+               [pageSizeOptions]="[5, 10, 25, 100]"
+               (page)="onPageChange($event)">
+</mat-paginator>

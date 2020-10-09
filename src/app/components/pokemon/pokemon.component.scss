@@ -1,0 +1,21 @@
+.pokemon-cards {
+    background-color: #cccccc;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    .pokemon-card {
+        max-width: 400px;
+        margin: 10px;
+        .pokemon-avatar {
+            background-size: contain;
+        }
+    }
+}
+
+mat-paginator {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 2px solid red;
+}

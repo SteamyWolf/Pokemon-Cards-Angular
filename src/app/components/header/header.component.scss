@@ -1,0 +1,22 @@
+
+
+mat-toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .router-links {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        mat-list-item {
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+            .active {
+                color: red;
+            }
+        }
+    }
+}
+

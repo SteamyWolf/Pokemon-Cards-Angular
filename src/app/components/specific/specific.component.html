@@ -1,0 +1,13 @@
+<section>
+    <h1>Search by Specific Pokemon ID</h1>
+    <mat-form-field>
+        <mat-label>Search by Pokemon ID</mat-label>
+        <input matInput placeholder="'25'" type="number" [(ngModel)]="value">
+        <mat-hint>Type in a pokemon id number between 1 and 900</mat-hint>
+    </mat-form-field>
+
+    <div class="pokemon-card">
+        <specific-pokemon [id]="value"></specific-pokemon>
+    </div>
+
+</section>
