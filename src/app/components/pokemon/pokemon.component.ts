@@ -3,14 +3,29 @@ import { PokemonService } from '../../shared/pokemon.service';
 import { Subscription, Observable } from 'rxjs';
 import { PokemonType } from '../../shared/pokemonType.model';
 import { PageEvent } from '@angular/material/paginator';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
     selector: 'app-pokemon',
     templateUrl: './pokemon.component.html',
-    styleUrls: ['./pokemon.component.scss']
+    styleUrls: ['./pokemon.component.scss'],
+    animations: [
+      trigger('flip', [
+        state('front', style({
+          color: 'red',
+          transform: 'rotateY(0deg)'
+        })),
+        state('back', style({
+          color: 'purple',
+          transform: 'rotateY(180deg)'
+        })),
+        transition('front <=> back', animate(300)),
+      ])
+    ]
 })
 
 export class Pokemon implements OnInit, OnDestroy {
+    state = 'front';
     completePokemon = [];
     pokemonSub: Subscription;
     pageSlice = [];
@@ -71,13 +86,18 @@ export class Pokemon implements OnInit, OnDestroy {
       }
 
       onPageChange(event: PageEvent) {
-        console.log(event);
         const startIndex = event.pageIndex * event.pageSize
         let endIndex = startIndex + event.pageSize;
         if (endIndex > this.completePokemon.length) {
           endIndex = this.completePokemon.length;
         }
         this.pageSlice = this.completePokemon.slice(startIndex, endIndex)
+      }
+
+      
+      onFlipCard(index) {
+        this.state === 'front' ? this.state = 'back' : this.state = 'front';
+        console.log(index + 1)
       }
 
 

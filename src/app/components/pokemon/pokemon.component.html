@@ -1,12 +1,14 @@
 <section class="pokemon-cards">
-    <mat-card *ngFor="let pokemon of pageSlice" class="pokemon-card">
+    <mat-card *ngFor="let pokemon of pageSlice; let i = index" class="pokemon-card" [@flip]="state" (click)="onFlipCard(i)">
+        <div class="front-card" *ngIf="state === 'front'">
         <mat-card-header>
             <div mat-card-avatar class="pokemon-avatar" [style.backgroundImage]="'url('+ pokemon.image + ')'"></div>
             <mat-card-title>{{ pokemon.name|titlecase }}</mat-card-title>
             <mat-card-subtitle>{{ pokemon.id }}</mat-card-subtitle>
         </mat-card-header>
         <img [src]="pokemon.bigImage" style="width: 100%">
-        <mat-card-content>
+        </div>
+        <mat-card-content *ngIf="state === 'back'" style="width: 400px; height: 465px;">
             <h3><b>Abilities:</b></h3>
             <ul *ngFor="let ability of pokemon.abilities">
                 <li>
