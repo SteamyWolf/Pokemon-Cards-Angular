@@ -8,7 +8,7 @@
         </mat-card-header>
         <img [src]="pokemon.bigImage" style="width: 100%">
         </div>
-        <mat-card-content *ngIf="pokemon.state === 'back'" style="width: 400px; height: 465px; max-width: 400px;" class="back-card" [@expandDiv]="expanded">
+        <mat-card-content *ngIf="pokemon.state === 'back'" class="back-card" [@expandDiv]="expanded">
             <h3><b>Abilities:</b></h3>
             <ul *ngFor="let ability of pokemon.abilities" style="list-style-type: none;">
                 <li>

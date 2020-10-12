@@ -23,7 +23,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
       ]),
       trigger('expandDiv', [
         state('no', style({
-          height: 465
+          height: 'fit-content'
         })),
         state('yes', style({
           height: 'fit-content'

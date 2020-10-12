@@ -4,9 +4,11 @@
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+    font-family: 'Grandstander', cursive;
     .pokemon-card {
         max-width: 400px;
         margin: 10px;
+        font-family: 'Grandstander', cursive;
         .pokemon-avatar {
             background-size: contain;
         }
@@ -23,4 +25,10 @@ mat-paginator {
 .chevron {
     margin: 0 auto;
     width: 56px;
+}
+
+.back-card {
+    width: 400px; 
+    height: fit-content; 
+    max-width: 400px;
 }

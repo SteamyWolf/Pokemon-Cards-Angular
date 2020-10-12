@@ -1,7 +1,11 @@
 .pokemon-card {
     max-width: 400px;
     margin: 10px;
+    font-family: 'Grandstander', cursive;
     .pokemon-avatar {
         background-size: contain;
     }
+}
+li {
+    font-family: 'Grandstander', cursive;
 }

@@ -3,7 +3,8 @@ import { PokemonService } from 'src/app/shared/pokemon.service';
 
 @Component({
     selector: 'app-ability',
-    templateUrl: './ability.component.html'
+    templateUrl: './ability.component.html',
+    styles: ["p {font-family: 'Grandstander', cursive;}"]
 })
 
 export class Ability implements OnInit {
