@@ -1,6 +1,6 @@
 <section class="pokemon-cards">
-    <mat-card *ngFor="let pokemon of pageSlice; let i = index" class="pokemon-card" [@flip]="state" (click)="onFlipCard(i)">
-        <div class="front-card" *ngIf="state === 'front'">
+    <mat-card *ngFor="let pokemon of pageSlice; let i = index" class="pokemon-card" [@flip]="pokemon.state" (click)="onFlipCard(i)">
+        <div class="front-card" *ngIf="pokemon.state === 'front'">
         <mat-card-header>
             <div mat-card-avatar class="pokemon-avatar" [style.backgroundImage]="'url('+ pokemon.image + ')'"></div>
             <mat-card-title>{{ pokemon.name|titlecase }}</mat-card-title>
@@ -8,12 +8,20 @@
         </mat-card-header>
         <img [src]="pokemon.bigImage" style="width: 100%">
         </div>
-        <mat-card-content *ngIf="state === 'back'" style="width: 400px; height: 465px;">
+        <mat-card-content *ngIf="pokemon.state === 'back'" style="width: 400px; height: 465px; max-width: 400px; max-height: 465px;" class="back-card">
             <h3><b>Abilities:</b></h3>
             <ul *ngFor="let ability of pokemon.abilities">
                 <li>
                     <app-ability [url]="ability.ability.url" [name]="ability.ability.name"></app-ability>
                 </li>
+            </ul>
+            <h3><b>Species:</b></h3>
+            <ul>
+                <li><b>{{ pokemon.species.name |titlecase }}</b></li>
+            </ul>
+            <h3><b>Stats:</b></h3>
+            <ul *ngFor="let stat of pokemon.stats">
+                <li><b>{{ stat.stat.name |uppercase }}:</b> {{ stat.base_stat }}</li>
             </ul>
         </mat-card-content>
     </mat-card>

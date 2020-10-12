@@ -18,6 +18,7 @@ export class SpecificPokemon implements OnInit, OnChanges {
     ngOnChanges() {
         if (this.id) {
             return this.pokemonService.getOnePokemon(this.id).subscribe(pokemon => {
+                console.log(pokemon)
                 return this.pokemon = pokemon;
             })
         } else {

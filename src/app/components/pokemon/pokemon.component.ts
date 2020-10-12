@@ -12,12 +12,12 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     animations: [
       trigger('flip', [
         state('front', style({
-          color: 'red',
+          color: 'blue',
           transform: 'rotateY(0deg)'
         })),
         state('back', style({
           color: 'purple',
-          transform: 'rotateY(180deg)'
+          transform: 'rotateY(180deg) scaleX(-1)',
         })),
         transition('front <=> back', animate(300)),
       ])
@@ -36,6 +36,7 @@ export class Pokemon implements OnInit, OnDestroy {
       if (this.pokemonService.usedPokemon.length > 0) {
         this.pokemonService.usedPokemon.forEach((observs: Observable<PokemonType>) => {
           return this.pokemonSub = observs.subscribe(data => {
+            console.log(data)
             this.pageSlice = this.completePokemon.slice(0, 25)
             let pokeObj = {
               name: data.name,
@@ -43,6 +44,9 @@ export class Pokemon implements OnInit, OnDestroy {
               image: data['sprites'].front_default,
               bigImage: data['sprites'].other['official-artwork'].front_default,
               abilities: data.abilities,
+              species: data['species'],
+              stats: data['stats'],
+              state: this.state
             }
             this.completePokemon.push(pokeObj)
             return this.completePokemon.sort((a,b) => {
@@ -61,6 +65,7 @@ export class Pokemon implements OnInit, OnDestroy {
         let pokemon = this.pokemonService.grabPokemon()
         pokemon.forEach((observs: Observable<PokemonType>) => {
           return this.pokemonSub = observs.subscribe(data => {
+            console.log(data)
             this.pageSlice = this.completePokemon.slice(0, 25)
             let pokeObj = {
               name: data.name,
@@ -68,6 +73,9 @@ export class Pokemon implements OnInit, OnDestroy {
               image: data['sprites'].front_default,
               bigImage: data['sprites'].other['official-artwork'].front_default,
               abilities: data.abilities,
+              species: data['species'],
+              stats: data['stats'],
+              state: this.state
             }
             this.completePokemon.push(pokeObj)
             return this.completePokemon.sort((a,b) => {
@@ -96,8 +104,7 @@ export class Pokemon implements OnInit, OnDestroy {
 
       
       onFlipCard(index) {
-        this.state === 'front' ? this.state = 'back' : this.state = 'front';
-        console.log(index + 1)
+        this.pageSlice[index].state === 'front' ? this.pageSlice[index].state = 'back' : this.pageSlice[index].state = 'front';
       }
 
 

@@ -18,6 +18,7 @@ import { SpecificPokemon } from './components/specific/specific-pokemon/specific
 import { FormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { Welcome } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     Ability,
     Header,
     Specific,
-    SpecificPokemon
+    SpecificPokemon,
+    Welcome
   ],
   imports: [
     BrowserModule,

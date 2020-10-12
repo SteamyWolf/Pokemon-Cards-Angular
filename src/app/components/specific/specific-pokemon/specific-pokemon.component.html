@@ -12,5 +12,9 @@
                 <app-ability [url]="ability.ability.url" [name]="ability.ability.name"></app-ability>
             </li>
         </ul>
+        <h3><b>Games:</b></h3>
+        <ul *ngFor="let game of pokemon.game_indices">
+            <li>{{ game.version.name |titlecase }}</li>
+        </ul>
     </mat-card-content>
 </mat-card>
