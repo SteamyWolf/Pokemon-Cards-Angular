@@ -20,15 +20,35 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
           transform: 'rotateY(180deg) scaleX(-1)',
         })),
         transition('front <=> back', animate(300)),
+      ]),
+      trigger('expandDiv', [
+        state('no', style({
+          height: 465
+        })),
+        state('yes', style({
+          height: 'fit-content'
+        })),
+        transition('no <=> yes', animate(3000))
+      ]),
+      trigger('chevron', [
+        state('down', style({
+          transform: 'rotateX(0deg)'
+        })),
+        state('up', style({
+          transform: 'rotateX(180deg)'
+        }))
       ])
     ]
 })
 
 export class Pokemon implements OnInit, OnDestroy {
     state = 'front';
+    expanded = 'no';
+    chevron = 'down';
     completePokemon = [];
     pokemonSub: Subscription;
     pageSlice = [];
+    toggled: boolean = false;
 
     constructor(private pokemonService: PokemonService) {}
 
@@ -36,7 +56,6 @@ export class Pokemon implements OnInit, OnDestroy {
       if (this.pokemonService.usedPokemon.length > 0) {
         this.pokemonService.usedPokemon.forEach((observs: Observable<PokemonType>) => {
           return this.pokemonSub = observs.subscribe(data => {
-            console.log(data)
             this.pageSlice = this.completePokemon.slice(0, 25)
             let pokeObj = {
               name: data.name,
@@ -46,7 +65,8 @@ export class Pokemon implements OnInit, OnDestroy {
               abilities: data.abilities,
               species: data['species'],
               stats: data['stats'],
-              state: this.state
+              state: this.state,
+              games: data['game_indices']
             }
             this.completePokemon.push(pokeObj)
             return this.completePokemon.sort((a,b) => {
@@ -65,7 +85,6 @@ export class Pokemon implements OnInit, OnDestroy {
         let pokemon = this.pokemonService.grabPokemon()
         pokemon.forEach((observs: Observable<PokemonType>) => {
           return this.pokemonSub = observs.subscribe(data => {
-            console.log(data)
             this.pageSlice = this.completePokemon.slice(0, 25)
             let pokeObj = {
               name: data.name,
@@ -75,7 +94,8 @@ export class Pokemon implements OnInit, OnDestroy {
               abilities: data.abilities,
               species: data['species'],
               stats: data['stats'],
-              state: this.state
+              state: this.state,
+              games: data['game_indices']
             }
             this.completePokemon.push(pokeObj)
             return this.completePokemon.sort((a,b) => {
@@ -105,6 +125,13 @@ export class Pokemon implements OnInit, OnDestroy {
       
       onFlipCard(index) {
         this.pageSlice[index].state === 'front' ? this.pageSlice[index].state = 'back' : this.pageSlice[index].state = 'front';
+      }
+
+      expand(index, event) {
+        this.pageSlice[index].state = 'front';
+        this.toggled = !this.toggled;
+        this.expanded === 'no' ? this.expanded = 'yes' : this.expanded = 'no';
+        this.chevron === 'down' ? this.chevron = 'up' : this.chevron = 'down';
       }
 
 

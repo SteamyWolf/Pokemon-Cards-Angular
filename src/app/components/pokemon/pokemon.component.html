@@ -8,21 +8,32 @@
         </mat-card-header>
         <img [src]="pokemon.bigImage" style="width: 100%">
         </div>
-        <mat-card-content *ngIf="pokemon.state === 'back'" style="width: 400px; height: 465px; max-width: 400px; max-height: 465px;" class="back-card">
+        <mat-card-content *ngIf="pokemon.state === 'back'" style="width: 400px; height: 465px; max-width: 400px;" class="back-card" [@expandDiv]="expanded">
             <h3><b>Abilities:</b></h3>
-            <ul *ngFor="let ability of pokemon.abilities">
+            <ul *ngFor="let ability of pokemon.abilities" style="list-style-type: none;">
                 <li>
                     <app-ability [url]="ability.ability.url" [name]="ability.ability.name"></app-ability>
                 </li>
             </ul>
             <h3><b>Species:</b></h3>
-            <ul>
-                <li><b>{{ pokemon.species.name |titlecase }}</b></li>
+            <ul style="list-style-type: none;">
+                <li><b>{{ pokemon.species.name |uppercase }}</b></li>
             </ul>
             <h3><b>Stats:</b></h3>
-            <ul *ngFor="let stat of pokemon.stats">
+            <ul *ngFor="let stat of pokemon.stats" style="list-style-type: none;">
                 <li><b>{{ stat.stat.name |uppercase }}:</b> {{ stat.base_stat }}</li>
             </ul>
+            <div class="chevron">
+                <button mat-fab color="purple" aria-label="Expand button" (click)="expand(i, $event)">
+                    <mat-icon [@chevron]="chevron">expand_more</mat-icon>
+                </button>
+            </div>
+            <div class="games" *ngIf="toggled">
+                <h3><b>Games featured in:</b></h3>
+                <ul *ngFor="let game of pokemon.games">
+                    <li>{{ game.version.name |titlecase }}</li>
+                </ul>
+            </div>
         </mat-card-content>
     </mat-card>
 </section>
