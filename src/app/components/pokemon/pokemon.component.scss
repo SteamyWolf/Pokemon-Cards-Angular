@@ -9,6 +9,7 @@
         max-width: 400px;
         margin: 10px;
         font-family: 'Grandstander', cursive;
+        cursor: pointer;
         .pokemon-avatar {
             background-size: contain;
         }
@@ -25,6 +26,7 @@ mat-paginator {
 .chevron {
     margin: 0 auto;
     width: 56px;
+    display: block;
 }
 
 .back-card {

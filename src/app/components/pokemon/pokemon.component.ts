@@ -28,7 +28,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
         state('yes', style({
           height: 'fit-content'
         })),
-        transition('no <=> yes', animate(3000))
+        transition('no <=> yes', animate(300))
       ]),
       trigger('chevron', [
         state('down', style({
@@ -36,7 +36,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
         })),
         state('up', style({
           transform: 'rotateX(180deg)'
-        }))
+        })),
+        transition('down <=> up', animate(3000))
       ])
     ]
 })
