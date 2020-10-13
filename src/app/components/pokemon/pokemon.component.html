@@ -1,3 +1,4 @@
+<app-welcome></app-welcome>
 <section class="pokemon-cards">
     <mat-card *ngFor="let pokemon of pageSlice; let i = index" class="pokemon-card" [@flip]="pokemon.state" (click)="onFlipCard(i)" style="display: block;">
         <div class="front-card" *ngIf="pokemon.state === 'front'">
