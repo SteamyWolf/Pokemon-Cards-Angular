@@ -22,6 +22,9 @@ import { Welcome } from './components/welcome/welcome.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthComponent } from './auth/auth.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import { MatButtonModule } from '@angular/material/button';
     Header,
     Specific,
     SpecificPokemon,
-    Welcome
+    Welcome,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatPaginatorModule,
     MatExpansionModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [PokemonService],
   bootstrap: [AppComponent]

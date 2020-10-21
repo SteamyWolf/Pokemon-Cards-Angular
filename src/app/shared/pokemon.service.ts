@@ -1,10 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { User } from './user.model';
 
 @Injectable({ providedIn: 'root' })
 export class PokemonService implements OnInit {
   public pokemon = [];
   public usedPokemon = [];
+  private userData: User[] = [] 
 
   constructor(private http: HttpClient) {}
 
@@ -33,5 +35,17 @@ export class PokemonService implements OnInit {
 
   getAbilityUrl(url) {
     return this.http.get(url)
+  }
+
+  getUserData() {
+    return this.http.get<{message: string, auth: User[]}>('http://localhost:3000/api/auth')
+      .subscribe((userData) => {
+        this.userData = userData.auth;
+        console.log(this.userData)
+      });
+  };
+
+  addUser(user) {
+    return this.http.post<{message: string}>('http://localhost:3000/api/auth', user);
   }
 }
